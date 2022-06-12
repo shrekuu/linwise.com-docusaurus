@@ -15,11 +15,16 @@ const docNavBarItems = docCategories.map((e) => ({
   position: 'left'
 }))
 
+const footerDocLinkItems = docCategories.map((e) => ({
+  label: capitalize(e),
+  to: `/docs/${e}/intro`,
+}))
+
 const redirects = [
-  {
-    to: `/docs/${docCategories[0]}/intro`,
-    from: '/docs',
-  },
+  // {
+  //   to: `/docs/${docCategories[0]}/intro`,
+  //   from: '/docs',
+  // },
   ...docCategories.map((e) => ({
     to: `/docs/${e}/intro`,
     from: `/docs/${e}`,
@@ -94,26 +99,7 @@ const config = {
           {
             title: 'Docs',
             items: [
-              {
-                label: 'React',
-                to: '/docs/react/intro',
-              },
-              {
-                label: 'Vue',
-                to: '/docs/vue/intro',
-              },
-              {
-                label: 'Angular',
-                to: '/docs/angular/intro',
-              },
-              {
-                label: 'Laravel',
-                to: '/docs/laravel/intro',
-              },
-              {
-                label: 'Linux',
-                to: '/docs/linux/intro',
-              },
+              ...footerDocLinkItems,
             ],
           },
           {
