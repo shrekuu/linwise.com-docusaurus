@@ -4,20 +4,42 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+const docCategories = ['react', 'vue', 'angular', 'laravel', 'linux']
+
+const capitalize = s => s.replace(/./, c => c.toUpperCase())
+
+const docNavBarItems = docCategories.map((e) => ({
+  type: 'doc',
+  docId: `${e}/intro`,
+  label: capitalize(e),
+  position: 'left'
+}))
+
+const redirects = [
+  {
+    to: `/docs/${docCategories[0]}/intro`,
+    from: '/docs',
+  },
+  ...docCategories.map((e) => ({
+    to: `/docs/${e}/intro`,
+    from: `/docs/${e}`,
+  }))
+]
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'Linwise',
+  tagline: 'Bond the front-end web wizard.',
+  url: 'https://www.linwise.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'favicon/favicon.ico',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'linwise', // Usually your GitHub org/user name.
+  projectName: 'linwise.com', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -34,20 +56,9 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
-        theme: {
-          customCss: require.resolve('./src/css/custom.css'),
         },
       }),
     ],
@@ -57,23 +68,23 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'My Site',
+        title: 'Linwise',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'Home',
+          src: 'img/logo-300x300.png',
         },
         items: [
+          ...docNavBarItems,
+          { to: '/blog', label: 'Blog', position: 'left' },
           {
-            type: 'doc',
-            docId: 'intro',
-            position: 'left',
-            label: 'Tutorial',
-          },
-          {to: '/blog', label: 'Blog', position: 'left'},
-          {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/shrekuu',
             label: 'GitHub',
             position: 'right',
+          },
+          {
+            href: 'https://github.com/facebook/docusaurus',
+            position: 'right',
+            className: 'header-github-link',
           },
         ],
       },
@@ -84,8 +95,24 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'React',
+                to: '/docs/react/intro',
+              },
+              {
+                label: 'Vue',
+                to: '/docs/vue/intro',
+              },
+              {
+                label: 'Angular',
+                to: '/docs/angular/intro',
+              },
+              {
+                label: 'Laravel',
+                to: '/docs/laravel/intro',
+              },
+              {
+                label: 'Linux',
+                to: '/docs/linux/intro',
               },
             ],
           },
@@ -93,16 +120,7 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                html: '<a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=UVdB_AIQUvsWlKWHukDSNIANAeYJ-xa3&jump_from=webapi"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="西安高级Web前端工程师" title="西安高级Web前端工程师"></a>'
               },
             ],
           },
@@ -115,18 +133,60 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/shrekuu',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} linwise.com. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
     }),
+  plugins: [
+    [
+      'pwa',
+      {
+        debug: true,
+        offlineModeActivationStrategies: [
+          'appInstalled',
+          'standalone',
+          'queryString',
+        ],
+        pwaHead: [
+          {
+            tagName: 'link', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png'
+          }, {
+            tagName: 'link', rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon/favicon-32x32.png'
+          }, {
+            tagName: 'link', rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon/favicon-16x16.png'
+          }, {
+            tagName: 'link', rel: 'manifest', href: '/favicon/site.webmanifest'
+          }, {
+            tagName: 'link', rel: 'mask-icon', href: '/favicon/safari-pinned-tab.svg', color: '#5bbad5'
+          }, {
+            tagName: 'link', rel: 'shortcut icon', href: '/favicon/favicon.ico'
+          }, {
+            tagName: 'meta', name: 'msapplication-TileColor', content: '#da532c'
+          }, {
+            tagName: 'meta', name: 'msapplication-config', content: '/favicon/browserconfig.xml'
+          }, {
+            tagName: 'meta', name: 'theme-color', content: '#ffffff'
+          }
+        ],
+      },
+    ],
+    [
+      'client-redirects',
+      {
+        redirects: [
+          ...redirects
+        ]
+      }
+    ]
+  ]
 };
 
 module.exports = config;
