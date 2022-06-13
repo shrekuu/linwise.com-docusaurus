@@ -94,7 +94,7 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
+        style: 'light',
         links: [
           {
             title: 'Docs',
@@ -124,7 +124,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} linwise.com. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} linwise.com. Built with Docusaurus. <br/> <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2020018633号-1</a>`,
       },
       prism: {
         theme: lightCodeTheme,
