@@ -21,10 +21,10 @@ const footerDocLinkItems = docCategories.map((e) => ({
 }))
 
 const redirects = [
-  // {
-  //   to: `/docs/${docCategories[0]}/intro`,
-  //   from: '/docs',
-  // },
+  {
+    to: `/docs/${docCategories[0]}/intro`,
+    from: '/docs',
+  },
   ...docCategories.map((e) => ({
     to: `/docs/${e}/intro`,
     from: `/docs/${e}`,
@@ -33,8 +33,8 @@ const redirects = [
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Linwise',
-  tagline: 'Bond the front-end web wizard.',
+  title: '温柔的码农的开发笔记',
+  tagline: '温柔的码农的开发笔记, 前端开发, 后端开发, 移动端 App 开发, 移动端混合开发, 小程序开发, Linux 服务器配置笔记. React 技术分享. Vue 技术分享. Angular 技术分享.',
   url: 'https://www.linwise.com',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -65,6 +65,9 @@ const config = {
         blog: {
           showReadingTime: true,
         },
+        theme: {
+          customCss: [require.resolve('./src/css/custom.css')],
+        },
       }),
     ],
   ],
@@ -83,13 +86,8 @@ const config = {
           { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/shrekuu',
-            label: 'GitHub',
-            position: 'right',
-          },
-          {
-            href: 'https://github.com/facebook/docusaurus',
-            position: 'right',
             className: 'header-github-link',
+            position: 'right',
           },
         ],
       },
@@ -141,6 +139,7 @@ const config = {
           'standalone',
           'queryString',
         ],
+        // This is ridiculous. 
         pwaHead: [
           {
             tagName: 'link', rel: 'apple-touch-icon', sizes: '180x180', href: '/favicon/apple-touch-icon.png'
@@ -171,8 +170,9 @@ const config = {
           ...redirects
         ]
       }
-    ]
-  ]
+    ],
+    'docusaurus-tailwindcss',
+  ],
 };
 
 module.exports = config;
