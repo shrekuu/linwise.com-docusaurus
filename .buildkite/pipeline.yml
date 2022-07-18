@@ -1,7 +1,8 @@
 steps:
   - commands:
-    - "cd linwise.com"
-    - "yarn install"
-    - "yarn build"
-    - "cd .."
-    - "mv linwise.com ~/download/"
+    - "ls -a"
+    # - "cd linwise.com"
+    # - "yarn install"
+    # - "yarn build"
+    # - "cd .."
+    # - "mv linwise.com ~/download/"
